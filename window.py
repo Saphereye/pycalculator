@@ -11,6 +11,7 @@ def convert(a):
         return '÷'
     else:
         return a
+   
 class MyGrid(Widget):
 
     global background_data
@@ -62,7 +63,7 @@ class MyGrid(Widget):
     def pressed_equals(self):
         global foreground_data,background_data,operator
         try:
-            foreground_data = str(eval(f'{background_data}{operator}{foreground_data}'))
+            foreground_data = str(eval(f'{background_data} {operator} {foreground_data}'))
             self.foreground_data.text = foreground_data
         except ZeroDivisionError:
             self.foreground_data.text = "Can't divide by zero"
@@ -71,8 +72,9 @@ class MyGrid(Widget):
 
     def pressed_dot(self):
         global foreground_data, background_data, operator
-        foreground_data += '.'
-        self.foreground_data.text = foreground_data
+        if foreground_data.count('.') >= 1:
+            foreground_data += '.'
+            self.foreground_data.text = foreground_data
 
     def backspace(self):
         global foreground_data, background_data, operator
